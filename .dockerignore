@@ -1,0 +1,10 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Python
+.env_ELSST_skg-if/

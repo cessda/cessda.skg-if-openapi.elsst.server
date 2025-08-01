@@ -14,7 +14,7 @@ app = FastAPI(
 # In a real application, these would come from a config file or environment variables.
 SKG_IF_BASE_URL = "https://w3id.org/skg-if/sandbox/cessda-elsst/"
 ELSST_DATASOURCE_ID = "urn:cessda:elsst-v5"
-DATA_FILE_PATH = "elsst_current.jsonld"
+DATA_FILE_PATH = "../data/elsst_current.jsonld"
 
 # --- Data Loading and Processing ---
 
