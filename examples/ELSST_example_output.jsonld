@@ -1,0 +1,617 @@
+{
+  "@context": [
+    "https://w3id.org/skg-if/context/skg-if.json",
+    {
+      "@base": "https://w3id.org/skg-if/sandbox/cessda-elsst/"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "urn:cessda:elsst-v5",
+      "@type": "DataSource",
+      "local_identifier": "elsst-v5",
+      "name": "European Language Social Science Thesaurus (ELSST) - Version 5",
+      "url": "https://thesauri.cessda.eu/elsst-5/en/"
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/f7d67282-82ea-4d98-9eac-c9fa2db8115d",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/f7d67282-82ea-4d98-9eac-c9fa2db8115d",
+      "name": "WAR CRIMES",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/436aaebf-5594-4bbc-a7b8-07591ca3dd89"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/3fd0ff55-0b36-43ba-ac47-7d8b80a504b9",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/3fd0ff55-0b36-43ba-ac47-7d8b80a504b9",
+      "name": "GROUPS",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/a3ebad20-f4d2-4940-99d1-68e61c7716c8",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/a3ebad20-f4d2-4940-99d1-68e61c7716c8",
+      "name": "CRIME VICTIMS",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "CRIME VICTIMISATION",
+        "CRIME VICTIMIZATION",
+        "GEWALTOPFER",
+        "KRIMINALITAETSOPFER",
+        "KRIMINALITÄTSOPFER",
+        "KRIMINELL TRAKASSERING",
+        "OFFER FOR KRIMINALITET",
+        "OFFER FÖR KRIMINALITET",
+        "OPFER VON GEWALTVERBRECHEN",
+        "OPFER VON VERBRECHEN",
+        "POŠKOZENÍ (OSOBY)",
+        "REPEAT VICTIMISATION",
+        "REPEAT VICTIMIZATION",
+        "RIKOSTEN UHRIT",
+        "RIKOSUHRIT",
+        "TRATO DISCRIMINATORIO A LAS VÍCTIMAS DEL CRIMEN",
+        "TRATO DISCRIMINATORIO REPETITIVO",
+        "UHRIKSI JOUTUMINEN",
+        "VÄKIVALLAN UHRIT",
+        "VÅLDSOFFER",
+        "VERBRECHEN ZUM OPFER FALLEN",
+        "VÍCTIMAS DE DELITOS",
+        "VÍCTIMAS DE LA VIOLENCIA",
+        "VICTIMES D’ACTES CRIMINELS",
+        "VICTIMES DE LA VIOLENCE",
+        "VICTIMS OF CRIME",
+        "VIKTIMISIERUNG",
+        "VIOLENCE VICTIMS",
+        "VOLDSOFFER",
+        "WIEDERHOLT VERBRECHEN ZUM OPFER FALLEN",
+        "ΕΠΑΝΑΛΑΜΒΑΝΟΜΕΝΗ ΘΥΜΑΤΟΠΟΙΗΣΗ",
+        "ΘΥΜΑΤΑ ΒΙΑΣ",
+        "ΘΥΜΑΤΑ ΕΓΚΛΗΜΑΤΙΚΩΝ ΕΝΕΡΓΕΙΩΝ",
+        "ΘΥΜΑΤΟΠΟΙΗΣΗ"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/77168e00-2f83-448a-a328-ab494f71dfb9"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/436aaebf-5594-4bbc-a7b8-07591ca3dd89",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/436aaebf-5594-4bbc-a7b8-07591ca3dd89",
+      "name": "CRIMES AGAINST HUMANITY",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "DELITOS HUMANITARIOS",
+        "HUMANITAETSVERBRECHEN",
+        "HUMANITAIRE MISDADEN",
+        "HUMANITARIAN CRIMES",
+        "HUMANITÄTSVERBRECHEN",
+        "NUSIKALTIMAI ŽMOGIŠKUMUI",
+        "NUSIKALTIMAI ŽMONIJAI",
+        "RIKOS IHMISYYTTÄ VASTAAN"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/5daecb52-714d-4e40-9be4-049de382f9c8"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/16d27dcb-448c-434b-a80f-eb8b62211f78",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/16d27dcb-448c-434b-a80f-eb8b62211f78",
+      "name": "CYBERCRIME",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "APGAULINGI ELEKTRONINIAI LAIŠKAI",
+        "AUSSPAEHEN VON DATEN",
+        "AUSSPÄHEN VON DATEN",
+        "BETRUEGERISCHE E-MAILS",
+        "BETRÜGERISCHE E-MAILS",
+        "CIBERDELITOS",
+        "COMPUTER CRIMES",
+        "COMPUTERBETRUG",
+        "COMPUTERKRIMINALITAET",
+        "COMPUTERKRIMINALITÄT",
+        "CORREOS ELECTRÓNICOS FRAUDULENTOS",
+        "COURRIERS ÉLECTRONIQUES FRAUDULEUX",
+        "CRIMES EN LIGNE",
+        "CRIMES INFORMATIQUES",
+        "CRIMINALITÉ EN LIGNE",
+        "CYBER CRIMES",
+        "CYBERBROTT",
+        "CYBERCRIME",
+        "CYBERCRIMES",
+        "CYBERKRIMINALITAET",
+        "CYBERKRIMINALITET",
+        "DELITO CIBERNÉTICO",
+        "DELITOS RELACIONADOS CON LA INFORMÁTICA",
+        "ELEKTRONINIAI NUSIKALTIMAI",
+        "E-MAIL-BETRUG",
+        "EMAILS FRAUDULEUX",
+        "E-POSTBEDRÄGERIER",
+        "FRAUDĂ PRIN EMAIL",
+        "FRAUDULENT EMAIL",
+        "HACKEN (CYBERKRIMINALITAET)",
+        "HACKEN (CYBERKRIMINALITÄT)",
+        "HACKING",
+        "HACKING",
+        "HACKING",
+        "HACKNING",
+        "HAKKEROINTI",
+        "HAMEÇONNAGE",
+        "INFRACȚIUNI INFORMATICE",
+        "INTERNETKRIMINALITAET",
+        "INTERNETKRIMINALITÄT",
+        "IT-BROTTSLIGHET",
+        "JAQUEO",
+        "KIBERNETINIAI NUSIKALTIMAI",
+        "KOMPIUTERINIAI NUSIKALTIMAI",
+        "NÄTBROTTSLIGHET",
+        "NETTKRIMINALITET",
+        "NETZKRIMINALITAET",
+        "NETZKRIMINALITÄT",
+        "PHISHING",
+        "PHISHING",
+        "PHISHING",
+        "PHISHING",
+        "PHISHING",
+        "PHISHING",
+        "PHISHINGAS",
+        "PIRATAGE INFORMATIQUE",
+        "POČÍTAČOVÉ ZLOČINY",
+        "PODVODNÉ EMAILY",
+        "TIETOJENKALASTELU",
+        "TIETOTEKNIIKKARIKOLLISUUS",
+        "TIETOVERKKORIKOLLISUUS",
+        "VERKKOHUIJAUKSET",
+        "VERKKORIKOKSET",
+        "VERKKOURKINTA"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/5daecb52-714d-4e40-9be4-049de382f9c8"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/41f99a89-3a2f-4104-8fab-64e5dff29bbc",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/41f99a89-3a2f-4104-8fab-64e5dff29bbc",
+      "name": "WAR VICTIMS",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "BAJAS EN COMBATE",
+        "DESFAVORECIDOS POR LA GUERRA",
+        "KRIEGSGESCHÄDIGTE",
+        "KRIEGSGESCHAEDIGTE",
+        "KRIGSFÖRLUST",
+        "KRIGSFÖRLUSTER I DÖDA OCH SÅRADE",
+        "OFFER FOR KRIG",
+        "OFFER FÖR KRIG",
+        "OPFER EINES KRIEGES",
+        "PERSONNES TOUCHÉES PAR LA GUERRE",
+        "PERTES DE GUERRE",
+        "SODASTA KÄRSINEET",
+        "STRÍÐSFÓRNARLÖMB",
+        "VICTIMES D’ACTES DE VIOLENCE",
+        "VICTIMES D’ACTES VIOLENTS",
+        "VICTIMES DE CRIMES",
+        "VICTIMES DE VIOLENCE",
+        "VICTIMISATION CRIMINELLE",
+        "VICTIMISATION RÉPÉTÉE",
+        "VICTIMS OF WAR",
+        "WAR CASUALTIES",
+        "WAR DISADVANTAGED",
+        "ΑΝΑΠΗΡΟΙ ΠΟΛΕΜΟΥ",
+        "ΑΠΩΛΕΙΕΣ ΠΟΛΕΜΟΥ",
+        "ΘΥΜΑΤΑ ΤΟΥ ΠΟΛΕΜΟΥ",
+        "ΜΕΙΟΝΕΚΤΟΥΝΤΕΣ ΛΟΓΩ ΠΟΛΕΜΟΥ"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/77168e00-2f83-448a-a328-ab494f71dfb9"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/77168e00-2f83-448a-a328-ab494f71dfb9",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/77168e00-2f83-448a-a328-ab494f71dfb9",
+      "name": "DISADVANTAGED GROUPS",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "BENADEELDE GROEPEN",
+        "GROUPES MARGINALISÉS",
+        "GROUPES VULNÉRABLES",
+        "GRUPOS MARGINADOS",
+        "GRUPOS VULNERABLES",
+        "HAAVOITTUNEET RYHMÄT",
+        "HEIKOIMMASSA ASEMASSA OLEVAT",
+        "HEIKOMMASSA ASEMASSA OLEVAT RYHMÄT",
+        "HUONO-OSAISET",
+        "KWETSBARE GROEPEN",
+        "MARGINALISED GROUPS",
+        "MARGINALISERADE GRUPPER",
+        "MARGINALISERTE GRUPPER",
+        "MARGINALISIERTE GRUPPEN",
+        "MARGINALIZED GROUPS",
+        "MARGINALIZUOTOS GRUPĖS",
+        "MISSGYNNADE GRUPPER",
+        "PAŽEIDŽIAMOS GRUPĖS",
+        "PERSONAS SOCIALMENTE DESFAVORECIDAS",
+        "PERSONNES SOCIALEMENT DÉFAVORISÉES",
+        "SOCIALIAI NUSKRIAUSTOS GRUPĖS",
+        "SOCIALLY DISADVANTAGED",
+        "SOCIALT UTSATTA GRUPPER",
+        "SOSIALT VANSKELIGSTILTE GRUPPER",
+        "SOSIALT",
+        "SOZIAL BENACHTEILIGTE",
+        "SOZIALE RANDGRUPPEN",
+        "SYRJÄYTYMISVAARASSA OLEVAT",
+        "UTSATTE GRUPPER",
+        "VÄHÄOSAISET",
+        "VULNERABLE GROUPS",
+        "VULNERABLE GRUPPEN",
+        "ΕΥΠΑΘΕΙΣ ΟΜΑΔΕΣ",
+        "ΚΟΙΝΩΝΙΚΩΣ ΜΕΙΟΝΕΚΤΟΥΝΤΑ ΑΤΟΜΑ",
+        "ΜΕΙΟΝΕΚΤΟΥΝΤΑ ΑΤΟΜΑ",
+        "ΟΜΑΔΕΣ ΠΕΡΙΘΩΡΙΟΠΟΙΗΜΕΝΩΝ ΑΤΟΜΩΝ"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/3fd0ff55-0b36-43ba-ac47-7d8b80a504b9"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/a99b7a42-c85e-4154-afe4-941b76b9020d",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/a99b7a42-c85e-4154-afe4-941b76b9020d",
+      "name": "EMOTIONAL STATES",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "AFFEKTE",
+        "EMOCIJOS",
+        "EMOCINIS STOVIS",
+        "EMOCIONES",
+        "EMOOTIOT",
+        "EMOTIONEN",
+        "EMOTIONER",
+        "EMOTIONS",
+        "ÉMOTIONS",
+        "EMPFINDUNGEN",
+        "FØLELSER",
+        "GEFUEHLE",
+        "GEFUEHLSZUSTAENDE",
+        "GEFÜHLE",
+        "GEMUETSZUSTAENDE",
+        "GEMÜTSZUSTÄNDE",
+        "HUMEURS",
+        "HUMOR (ESTADO EMOCIONAL)",
+        "HUMØR",
+        "MIELIALA",
+        "MOODS",
+        "NUOTAIKOS",
+        "SINNESSTÄMNINGAR",
+        "STIMMUNGEN",
+        "TUNNETILAT",
+        "ΔΙΑΘΕΣΗ (ΨΥΧΙΚΗ)",
+        "ΣΥΝΑΙΣΘΗΜΑΤΑ"
+      ]
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/0bd98e7a-b04c-4762-a9f7-259cf905f657",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/0bd98e7a-b04c-4762-a9f7-259cf905f657",
+      "name": "POLITICAL OFFENCES",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "CRIMES POLITIQUES",
+        "POLITICAL CRIMES",
+        "POLITICKÉ TRESTNÉ ČINY",
+        "POLITISCH MOTIVIERTE DELIKTE",
+        "POLITISCH MOTIVIERTE STRAFTATEN",
+        "POLITISCH MOTIVIERTE VERBRECHEN",
+        "POLITISCHE DELIKTE",
+        "POLITISCHE VERBRECHEN"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/114ca5c7-579e-4159-8b21-e0b8800407fc"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/5daecb52-714d-4e40-9be4-049de382f9c8",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/5daecb52-714d-4e40-9be4-049de382f9c8",
+      "name": "CRIME AND SECURITY",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "KRIMINALITA",
+        "KRIMINALITAET UND SICHERHEIT",
+        "ZLOČIN",
+        "ZLOČINNOST"
+      ]
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/a292e6a1-1411-4f34-b3b0-68b0d24a44a9",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/a292e6a1-1411-4f34-b3b0-68b0d24a44a9",
+      "name": "CRIMINAL NEGLIGENCE",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "CRIME OF OMISSION",
+        "CRIME PAR OMISSION",
+        "DELITO DE OMISIÓN",
+        "FAHRLAESSIGKEITSDELIKT",
+        "IMPRUDENȚĂ",
+        "KRIMINELL UNNLATELSE",
+        "NEBĂGARE DE SEAMĂ",
+        "NEGLIGENCIA PENAL",
+        "NEGLIJENȚĂ ÎN SERVICIU",
+        "NUSIKALSTAMAS NEATSARGUMAS",
+        "NUSIKALSTAMAS NEVEIKIMAS",
+        "NUSIKALSTAMAS NEVEIKLUMAS",
+        "STRAFBARE FAHRLAESSIGKEIT",
+        "STRAFBARE FAHRLÄSSIGKEIT",
+        "UNDERLÅTENHETSBROTT",
+        "UNTERLASSUNGSDELIKT"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/96f17b92-6f9d-47da-951f-002383a88501"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/a86c5927-987b-4ea8-9cea-9ec676824c86",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/a86c5927-987b-4ea8-9cea-9ec676824c86",
+      "name": "CRIME PREVENTION",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "KRIMINALITAETSBEKAEMPFUNG",
+        "KRIMINALITAETSPRAEVENTION",
+        "KRIMINALITÄTSPRÄVENTION",
+        "KRIMINALITETSFOREBYGGING",
+        "KRIMINALPRAEVENTION",
+        "KRIMINALPRÄVENTION",
+        "PRAEVENTIVE VERBRECHENSBEKAEMPFUNG",
+        "PRÄVENTIVE VERBRECHENSBEKÄMPFUNG",
+        "PREVENCE KRIMINALITY",
+        "RIKOLLISUUDEN EHKÄISEMINEN",
+        "RIKOSTEN TORJUNTA",
+        "VERBRECHENSPRAEVENTION",
+        "VERBRECHENSPRÄVENTION",
+        "VERHINDERUNG VON STRAFTATEN",
+        "VERHUETUNG VON VERBRECHEN",
+        "VERHÜTUNG VON VERBRECHEN"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/643080b2-abae-4a9d-85e8-aced12788669"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/643080b2-abae-4a9d-85e8-aced12788669",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/643080b2-abae-4a9d-85e8-aced12788669",
+      "name": "POLICING",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "ACTIVIDADES POLICIALES",
+        "ACTIVITÉS POLICIÈRES",
+        "AKTIVITA POLICIE",
+        "AKTIVITAETEN DER POLIZEI",
+        "LÖGREGLUVALD",
+        "PATRULLAJE",
+        "PODER POLICIAL",
+        "POLICE ACTIVITIES",
+        "POLICE POWER",
+        "POLICEJNÍ AKTIVITA",
+        "POLICEJNÍ ÚKOLY",
+        "POLICEJNÍ ÚKONY",
+        "POLICIJOS GALIOS",
+        "POLICIJOS VEIKLA",
+        "POLIISIN TOIMIVALTA",
+        "POLIISIVALVONTA",
+        "POLISINGRIPANDE",
+        "POLISÖVERVAKNING",
+        "POLITIMYNDIGHET",
+        "POLITIOPPGAVER",
+        "POLIZEIAUFGABEN",
+        "POLIZEIGEWALT (POLIZEIAUFGABEN)",
+        "POLIZEILICHE AUFGABEN",
+        "POLIZEILICHE KONTROLLE",
+        "POLIZEILICHE MASSNAHMEN",
+        "POLIZEILICHES HANDELN",
+        "ÚKOLY POLICIE",
+        "ÚKONY POLICIE",
+        "ΑΣΤΥΝΟΜΙΚΗ ΕΠΙΤΗΡΗΣΗ",
+        "ΑΣΤΥΝΟΜΙΚΗ ΠΑΡΑΚΟΛΟΥΘΗΣΗ",
+        "ΑΣΤΥΝΟΜΙΚΟΣ ΕΛΕΓΧΟΣ",
+        "ΜΠΛΟΚΟ ΑΣΤΥΝΟΜΙΑΣ"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/5daecb52-714d-4e40-9be4-049de382f9c8"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/2b6c5280-edbd-49de-b72e-69593eb45968",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/2b6c5280-edbd-49de-b72e-69593eb45968",
+      "name": "CRIMES AGAINST PROPERTY",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "BROTT MOT EGENDOM",
+        "BRUDD PÅ EIENDOMSRETT",
+        "MAJETKOVÉ ZLOČINY",
+        "OMAISUUSRIKOKSET"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/114ca5c7-579e-4159-8b21-e0b8800407fc"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/96f17b92-6f9d-47da-951f-002383a88501",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/96f17b92-6f9d-47da-951f-002383a88501",
+      "name": "CRIMES AGAINST PERSONS",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "DELIKTE GEGEN PERSONEN",
+        "NUSIKALTIMAI ASMENIUI",
+        "RIKOKSET YKSILÖÄ VASTAAN",
+        "STRAFTATEN GEGEN PERSONEN"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/114ca5c7-579e-4159-8b21-e0b8800407fc"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/f3ae7ed4-088c-44fa-9de3-9254462af371",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/f3ae7ed4-088c-44fa-9de3-9254462af371",
+      "name": "FEAR OF CRIME",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "ÁHYGGJUR AF GLÆPUM",
+        "ANGST VOR VERBRECHEN",
+        "FURCHT VOR VERBRECHEN",
+        "KRIMINALITAETSANGST",
+        "KRIMINALITAETSFURCHT",
+        "KRIMINALITÄTSANGST",
+        "OBAVY Z KRIMINALITY",
+        "OBAVY ZE ZLOČINNOSTI",
+        "OBAVY ZE ZLOČINU",
+        "STRACH ZE ZLOČINNOSTI",
+        "STRACH ZE ZLOČINU",
+        "VERBRECHENSANGST",
+        "VERBRECHENSFURCHT"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/e6632a87-1a0a-4e55-9555-9c1326c76e6c"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/e6632a87-1a0a-4e55-9555-9c1326c76e6c",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/e6632a87-1a0a-4e55-9555-9c1326c76e6c",
+      "name": "FEAR",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "FRUKTAN",
+        "FRYKT",
+        "HRÆÐSLA",
+        "MIEDO",
+        "PANIC",
+        "PANICĂ",
+        "PÁNICO",
+        "PANIIKKI",
+        "PANIK",
+        "PANIK",
+        "PANIKA",
+        "PANIKK",
+        "PANIQUE",
+        "SKREKK",
+        "TEAMĂ",
+        "ΠΑΝΙΚΟΣ"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/a99b7a42-c85e-4154-afe4-941b76b9020d"
+      }
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/114ca5c7-579e-4159-8b21-e0b8800407fc",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/114ca5c7-579e-4159-8b21-e0b8800407fc",
+      "name": "OFFENCES",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "CRÍMENES",
+        "CRIMES",
+        "CRIMES",
+        "DELIKTE",
+        "DÉLITS",
+        "INFRACCIONES",
+        "KRIMINALITET",
+        "NUSIKALSTAMA VEIKLA",
+        "OUTRAGES",
+        "PŘESTUPKY",
+        "TRESTNÉ ČINY",
+        "VERBRECHEN (STRAFTATEN)",
+        "VERSTOESSE",
+        "VERSTÖSSE",
+        "ΕΓΚΛΗΜΑΤΑ"
+      ]
+    },
+    {
+      "@id": "https://w3id.org/skg-if/sandbox/cessda-elsst/https%3A//elsst.cessda.eu/id/5/226f1918-3554-4715-99cb-bb6f19dc4455",
+      "@type": "Topic",
+      "local_identifier": "https://elsst.cessda.eu/id/5/226f1918-3554-4715-99cb-bb6f19dc4455",
+      "name": "FINANCIAL CRIME",
+      "source": {
+        "@id": "urn:cessda:elsst-v5"
+      },
+      "alternate_name": [
+        "EKOBROTT",
+        "FINANČNÍ ZLOČINY",
+        "FINANZDELIKTE",
+        "FINANZKRIMINALITAET",
+        "FINANZKRIMINALITÄT",
+        "PENĚŽNÍ ZLOČINY",
+        "TALOUDELLISET RIKOKSET",
+        "TALOUSRIKOKSET",
+        "WIRTSCHAFTSDELIKTE",
+        "WIRTSCHAFTSKRIMINIALITAET",
+        "WIRTSCHAFTSSTRAFTATEN",
+        "WIRTSCHAFTSVERGEHEN"
+      ],
+      "parent_topic": {
+        "@type": "Topic",
+        "local_identifier": "https://elsst.cessda.eu/id/5/5daecb52-714d-4e40-9be4-049de382f9c8"
+      }
+    }
+  ]
+}
