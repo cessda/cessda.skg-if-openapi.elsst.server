@@ -226,4 +226,4 @@ if __name__ == '__main__':
     # For production, you would use a production-grade ASGI server like Gunicorn.
     # Example: uvicorn server:app --host 0.0.0.0 --port 8000
     print("Starting FastAPI server...")
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
