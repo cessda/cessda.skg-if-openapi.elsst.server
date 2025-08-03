@@ -1,5 +1,5 @@
 # Stage 1: Use an official Python runtime as a parent image
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -26,4 +26,5 @@ COPY . .
 EXPOSE 8000
 
 # Define the command to run the application using Gunicorn for production
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "server:app"]
+#CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "server:app"]
+ENTRYPOINT ["python", "server.py"]

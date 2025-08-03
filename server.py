@@ -14,7 +14,7 @@ app = FastAPI(
 # In a real application, these would come from a config file or environment variables.
 SKG_IF_BASE_URL = "https://w3id.org/skg-if/sandbox/cessda-elsst/"
 ELSST_DATASOURCE_ID = "urn:cessda:elsst-v5"
-DATA_FILE_PATH = "../data/elsst_current.jsonld"
+DATA_FILE_PATH = "data/elsst_current.jsonld"
 
 # --- Data Loading and Processing ---
 
@@ -173,20 +173,29 @@ def get_data_source():
 # --- API Endpoint ---
 
 @app.get('/api/topics', summary="Get SKG-IF topic suggestions", response_model=dict)
-async def autocomplete(q: str = Query(..., min_length=3, description="The search query string (at least 3 characters).")):
+async def autocomplete(
+    filter: str = Query(
+        ...,
+        min_length=22, # len("cf.search.labels:") + 3
+        regex="^cf\.search\.labels:.{3,}$",
+        description="Filter for topics. Format: `cf.search.labels:<search_term>` (search term must be at least 3 characters)."
+    )
+):
     """
     Provides autocomplete suggestions for social science topics.
 
-    - Searches for concepts in the ELSST thesaurus matching the query `q`.
+    - Searches for concepts in the ELSST thesaurus matching the search term in the filter.
+    - The filter format must be `cf.search.labels:<search_term>`.
     - Returns a JSON-LD object compliant with the SKG Interoperability Framework.
     - The response includes the matching topics and their full parent hierarchies.
     """
-    query = q.lower()
+    prefix = "cf.search.labels:"
+    search_term = filter[len(prefix):]
+    query = search_term.lower()
 
     # Find concepts that match the query
     matching_concept_ids = set()
     for concept_id, data in ELSST_DATA.items():
-        # Check preferred label
         if query in data.get('prefLabel', '').lower():
             matching_concept_ids.add(concept_id)
         # Check alternative labels
