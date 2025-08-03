@@ -177,7 +177,7 @@ async def autocomplete(
     filter: str = Query(
         ...,
         min_length=22, # len("cf.search.labels:") + 3
-        regex="^cf\.search\.labels:.{3,}$",
+        pattern="^cf\.search\.labels:.{3,}$",
         description="Filter for topics. Format: `cf.search.labels:<search_term>` (search term must be at least 3 characters)."
     )
 ):
