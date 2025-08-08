@@ -1,6 +1,7 @@
 import json
-from fastapi import FastAPI, Request, HTTPException, Query
-from urllib.parse import quote
+from fastapi import FastAPI, HTTPException, Query, Path
+import re
+import random
 import uvicorn
 
 # --- Application Setup ---
@@ -13,7 +14,10 @@ app = FastAPI(
 # --- Configuration ---
 # In a real application, these would come from a config file or environment variables.
 SKG_IF_BASE_URL = "https://w3id.org/skg-if/sandbox/cessda-elsst/"
+SKG_IF_CONTEXT_URL = "https://w3id.org/skg-if/context/1.0.1/skg-if.json"
 ELSST_DATASOURCE_ID = "urn:cessda:elsst-v5"
+ELSST_SCHEME_NAME = "CESSDA ELSST v5"
+ELSST_SCHEME_URL = "https://thesauri.cessda.eu/elsst-5"
 DATA_FILE_PATH = "data/elsst_current.jsonld"
 
 # --- Data Loading and Processing ---
@@ -27,14 +31,14 @@ SKOS_BROADER = "http://www.w3.org/2004/02/skos/core#broader"
 
 def load_elsst_data(filepath: str) -> dict:
     """
-    Loads and processes a Skosmos JSON-LD export file into a simple dictionary.
+    Loads and processes an ELSST JSON-LD export file into a multilingual dictionary.
 
     Args:
-        filepath: The path to the .jsonld file exported from Skosmos.
+        filepath: The path to the .jsonld file.
 
     Returns:
         A dictionary where keys are concept URIs and values are dicts
-        with 'prefLabel', 'altLabel', and 'broader' keys.
+        with multilingual 'prefLabels', 'altLabels', and 'broader' keys.
     """
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -76,20 +80,21 @@ def load_elsst_data(filepath: str) -> dict:
 
         concept_id = concept['@id']
 
-        # Get English prefLabel
-        pref_label = ""
-        labels = concept.get(SKOS_PREF_LABEL, [])
-        for label in labels:
-            if label.get('@language') == 'en':
-                pref_label = label.get('@value', '')
-                break
+        # Get all prefLabels, keyed by language
+        pref_labels = {}
+        for label in concept.get(SKOS_PREF_LABEL, []):
+            lang = label.get('@language')
+            value = label.get('@value')
+            if lang and value:
+                pref_labels[lang] = value
 
-        # Get all altLabels
-        alt_labels = []
+        # Get all altLabels, keyed by language and grouped in a list
+        alt_labels = {}
         for label in concept.get(SKOS_ALT_LABEL, []):
-            val = label.get('@value')
-            if val:
-                alt_labels.append(val)
+            lang = label.get('@language')
+            value = label.get('@value')
+            if lang and value:
+                alt_labels.setdefault(lang, []).append(value)
 
         # Get broader concept
         broader = concept.get(SKOS_BROADER, [])
@@ -99,132 +104,223 @@ def load_elsst_data(filepath: str) -> dict:
 
         processed_data[concept_id] = {
             '@id': concept_id,
-            'prefLabel': pref_label,
-            'altLabel': alt_labels,
+            'prefLabels': pref_labels,
+            'altLabels': alt_labels,
             'broader': broader_id
         }
 
-    print(f"Loaded {len(processed_data)} concepts")
+    print(f"Loaded {len(processed_data)} concepts with multilingual labels")
     return processed_data
 
-   
+
+def build_search_index(processed_data: dict) -> dict:
+    """
+    Builds a search index from the processed ELSST data for faster lookups.
+
+    Args:
+        processed_data: The dictionary of concepts from load_elsst_data.
+
+    Returns:
+        A dictionary where keys are language codes (e.g., 'en') and values are
+        lists of tuples, with each tuple containing a lowercase label and the
+        corresponding concept URI. e.g., {'en': [('poverty', 'uri:1'), ...]}
+    """
+    search_index = {}
+    print("Building search index...")
+    for concept_id, data in processed_data.items():
+        # Index preferred labels
+        for lang, label in data.get('prefLabels', {}).items():
+            search_index.setdefault(lang, []).append((label.lower(), concept_id))
+
+        # Index alternative labels
+        for lang, labels in data.get('altLabels', {}).items():
+            for label in labels:
+                search_index.setdefault(lang, []).append((label.lower(), concept_id))
+
+    for lang, items in search_index.items():
+        print(f"  - Indexed {len(items)} labels for language '{lang}'")
+
+    print("Search index built.")
+    return search_index
+
 
 # --- In-memory Data Store ---
 # The data is loaded once when the application starts.
-# To use this server, you must first download the JSON-LD export from:
-# https://thesauri.cessda.eu/elsst-5/en/
-# And save it as 'skosmos_export.jsonld.txt' in the same directory as this script.
 print("Loading ELSST data from file...")
 ELSST_DATA = load_elsst_data(DATA_FILE_PATH)
-print(f"Successfully loaded {len(ELSST_DATA)} concepts.")
+SEARCH_INDEX = build_search_index(ELSST_DATA)
 
 
 # --- Helper Functions ---
 
-def get_concept_by_id(concept_id):
-    """Retrieves a concept from the in-memory data store."""
-    return ELSST_DATA.get(concept_id)
-
-def get_parent_hierarchy(concept_id):
-    """Recursively fetches all parent concepts for a given concept ID."""
-    hierarchy = set()
-    current_id = concept_id
-    # Limit recursion to prevent infinite loops in case of cyclic data
-    for _ in range(20): 
-        if not current_id:
-            break
-        concept = get_concept_by_id(current_id)
-        if concept:
-            hierarchy.add(current_id)
-            current_id = concept.get("broader")
-        else:
-            break
-    return hierarchy
-
-def to_skgif_topic(concept_data):
-    """Transforms a single ELSST concept into an SKG-IF Topic entity."""
-    local_id = concept_data['@id']
-    topic = {
-        "@id": f"{SKG_IF_BASE_URL}{quote(local_id)}",
-        "@type": "Topic",
-        "local_identifier": local_id,
-        "name": concept_data.get("prefLabel"),
-        "source": {"@id": ELSST_DATASOURCE_ID}
-    }
-    if concept_data.get("altLabel"):
-        topic["alternate_name"] = concept_data["altLabel"]
-    if concept_data.get("broader"):
-        topic["parent_topic"] = {
-            "@type": "Topic",
-            "local_identifier": concept_data["broader"]
-        }
-    return topic
-
-def get_data_source():
-    """Creates the SKG-IF DataSource entity for ELSST."""
+def format_topic_for_response(concept_data: dict) -> dict:
+    """Transforms a single ELSST concept into the API's response format."""
     return {
-        "@id": ELSST_DATASOURCE_ID,
-        "@type": "DataSource",
-        "local_identifier": "elsst-v5",
-        "name": "European Language Social Science Thesaurus (ELSST) - Version 5",
-        "url": "https://thesauri.cessda.eu/elsst-5/en/"
+        "local_identifier": concept_data.get('@id'),
+        "identifiers": [],  # ELSST data does not contain external identifiers like wikidata
+        "entity_type": "topic",
+        "labels": concept_data.get("prefLabels", {})
     }
+
+# --- Debugging Endpoint ---
+
+@app.get('/show_index_data', summary="Show a sample of the in-memory data", include_in_schema=False)
+async def show_index_data():
+    """
+    Provides a sample of the loaded ELSST data and the constructed search index
+    for debugging purposes. Shows up to 10 random items from the main data store
+    and up to 10 random items from the search index for each language.
+    """
+    # Sample from ELSST_DATA
+    elsst_keys = list(ELSST_DATA.keys())
+    sample_size_elsst = min(10, len(elsst_keys))
+    # Ensure we don't try to sample from an empty list if data loading failed
+    random_elsst_keys = random.sample(elsst_keys, sample_size_elsst) if elsst_keys else []
+    elsst_sample = {key: ELSST_DATA[key] for key in random_elsst_keys}
+
+    # Sample from SEARCH_INDEX for each language
+    search_index_sample = {}
+    for lang, items in SEARCH_INDEX.items():
+        sample_size_index = min(10, len(items))
+        search_index_sample[lang] = random.sample(items, sample_size_index)
+
+    return {
+        "elsst_data_sample": elsst_sample,
+        "search_index_sample": search_index_sample
+    }
+
 
 # --- API Endpoint ---
 
-@app.get('/api/topics', summary="Get SKG-IF topic suggestions", response_model=dict)
-async def autocomplete(
+@app.get('/api/topics/{topic_id:path}', summary="Get a single topic by its identifier", response_model=dict)
+async def topic_single(
+    topic_id: str = Path(..., description="The persistent identifier (URI) of the topic. Must be URL-encoded.")
+):
+    """
+    Retrieves a single topic by its persistent identifier (URI).
+
+    - The `topic_id` path parameter is the full, URL-encoded URI of the topic.
+    - Example: `/api/topics/http%3A%2F%2Fpurl.org%2Felsst%2F4%2Fes%2F368`
+    """
+    # FastAPI automatically URL-decodes path parameters.
+    # The topic_id is the key in our ELSST_DATA dictionary.
+    concept_data = ELSST_DATA.get(topic_id)
+
+    if not concept_data:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Topic with ID '{topic_id}' not found."
+        )
+
+    # Format the single topic into the SKG-IF JSON-LD structure.
+    topic_graph_item = {
+        "local_identifier": concept_data.get('@id'),
+        #"identifiers": [
+        #    {
+        #        "scheme": ELSST_SCHEME_NAME,
+        #        "value": ELSST_SCHEME_URL
+        #    }
+        #,
+        "entity_type": "topic",
+        "labels": concept_data.get("prefLabels", {})
+    }
+
+    # Construct the final JSON-LD response
+    return {
+        "@context": [
+            SKG_IF_CONTEXT_URL,
+            {
+                "@base": SKG_IF_BASE_URL
+            }
+        ],
+        "@graph": [topic_graph_item]
+    }
+
+
+@app.get('/api/topics', summary="Get topic suggestions", response_model=dict)
+async def topic_result(
     filter: str = Query(
         ...,
-        min_length=22, # len("cf.search.labels:") + 3
-        pattern="^cf\.search\.labels:.{3,}$",
-        description="Filter for topics. Format: `cf.search.labels:<search_term>` (search term must be at least 3 characters)."
+        min_length=19, # e.g., "cf.search.labels:abc"
+        description="Filter for topics. Format: `cf.search.labels:<term>,cf.search.language:<lang>`"
     )
 ):
     """
     Provides autocomplete suggestions for social science topics.
 
-    - Searches for concepts in the ELSST thesaurus matching the search term in the filter.
-    - The filter format must be `cf.search.labels:<search_term>`.
-    - Returns a JSON-LD object compliant with the SKG Interoperability Framework.
-    - The response includes the matching topics and their full parent hierarchies.
+    - The `filter` query parameter accepts a comma-separated string of key:value pairs.
+    - `cf.search.labels` (required): The term to search for (min 3 characters).
+    - `cf.search.language` (optional): The 2-letter language code (defaults to 'en').
+    - Example: `?filter=cf.search.labels:poverty,cf.search.language:de`
     """
-    prefix = "cf.search.labels:"
-    search_term = filter[len(prefix):]
+    # Parse the complex 'filter' parameter which can contain multiple key:value pairs.
+    filter_params = {}
+    try:
+        for part in filter.split(','):
+            key, value = part.split(':', 1)
+            filter_params[key.strip()] = value.strip()
+    except ValueError:
+        raise HTTPException(
+            status_code=422,
+            detail=[{
+                "loc": ["query", "filter"],
+                "msg": "Filter parameter is malformed. Expected format: 'key1:value1,key2:value2'.",
+                "type": "value_error.format"
+            }]
+        )
+
+    # Extract and validate search term from the parsed filter
+    search_term = filter_params.get("cf.search.labels")
+    if not search_term or len(search_term) < 3:
+        raise HTTPException(
+            status_code=422,
+            detail=[{
+                "loc": ["query", "filter"],
+                "msg": "A 'cf.search.labels' key with a value of at least 3 characters must be provided in the filter.",
+                "type": "value_error.missing"
+            }]
+        )
+
+    # Extract and validate language code, defaulting to 'en'
+    language_code = filter_params.get("cf.search.language", "en")
+    if not re.match("^[a-z]{2}$", language_code):
+        raise HTTPException(
+            status_code=422,
+            detail=[{
+                "loc": ["query", "filter"],
+                "msg": "If provided, the value for 'cf.search.language' must be a 2-letter ISO 639-1 code.",
+                "type": "value_error.pattern"
+            }]
+        )
+
+    search_lang = language_code
     query = search_term.lower()
 
-    # Find concepts that match the query
+    # Find concepts that match the query in the specified language using the search index
     matching_concept_ids = set()
-    for concept_id, data in ELSST_DATA.items():
-        if query in data.get('prefLabel', '').lower():
+
+    # Get all searchable labels for the given language
+    labels_for_lang = SEARCH_INDEX.get(search_lang, [])
+
+    for label, concept_id in labels_for_lang:
+        if query in label:
             matching_concept_ids.add(concept_id)
-        # Check alternative labels
-        for alt_label in data.get('altLabel', []):
-            if query in alt_label.lower():
-                matching_concept_ids.add(concept_id)
-                break
 
-    # For each match, get its full parent hierarchy
-    all_related_ids = set()
-    for concept_id in matching_concept_ids:
-        all_related_ids.update(get_parent_hierarchy(concept_id))
-
-    # Build the SKG-IF graph
-    graph_entities = [get_data_source()]
-    for concept_id in all_related_ids:
-        concept_data = get_concept_by_id(concept_id)
+    # Build the results list, sorting for consistent output
+    results = []
+    for concept_id in sorted(list(matching_concept_ids)):
+        concept_data = ELSST_DATA.get(concept_id)
         if concept_data:
-            graph_entities.append(to_skgif_topic(concept_data))
+            results.append(format_topic_for_response(concept_data))
 
     # Construct the final JSON-LD response
     response = {
-        "@context": [
-            "https://w3id.org/skg-if/context/skg-if.json",
-            {
-                "@base": SKG_IF_BASE_URL
-            }
-        ],
-        "@graph": graph_entities
+        "meta": {
+            "count": len(results),
+            "page": 0,
+            "page_size": 0
+        },
+        "results": results
     }
 
     return response
