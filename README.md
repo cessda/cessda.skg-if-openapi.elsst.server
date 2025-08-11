@@ -1,6 +1,13 @@
-# API Server
+# CESSDA SKG IF OpenAPI ELSST Server
 
-This project provides a simple API server to query topics data.
+A lightweight Python web service exposing the ELSST (European Language Social Science Thesaurus) topics via RESTful OpenAPI endpoints. This server is designed for interoperability with CESSDA SKG IF-compliant clients and services.
+
+## Features
+
+- Retrieve ELSST topics by ID (escaped/unescaped URIs)
+- Search for topics with filters (e.g., by label or language)
+- Standards-based JSON API responses
+- Simple configuration and deployment
 
 ## Requirements
 
@@ -64,30 +71,25 @@ For production, it's recommended to run the application using a production-grade
     </VirtualHost>
     ```
 
-## Example Queries
 
-### Get a topic by ID
-```bash
-curl https://skg-if-openapi.cessda.eu/api/topics/https%3A%2F%2Felsst.cessda.eu%2Fid%2F5%2Fdab48525-c485-459b-bb41-730756f1dd65
+## Usage Examples
+
+### 1. Get Topic by ID
+
+#### 1.1 Escaped Topic ID
+
+```sh
+curl "https://skg-if-openapi.cessda.eu/api/topics/https%3A%2F%2Felsst.cessda.eu%2Fid%2F5%2Fdab48525-c485-459b-bb41-730756f1dd65"
 ```
 
-### Search topics by label and language
-```bash
-curl "http://localhost:8000/api/topics?filter=cf.search.labels:barn,cf.search.language:no"
+#### 1.2 Unescaped Topic ID
+
+```sh
+curl "https://skg-if-openapi.cessda.eu/api/topics/https://elsst.cessda.eu/id/5/dab48525-c485-459b-bb41-730756f1dd65"
 ```
 
-## Response Format
-Responses are returned in JSON format.
+### 2. Get List of Topics with Filter
 
-**Example:**
-```json
-{
-  "id": "https://elsst.cessda.eu/id/5/dab48525-c485-459b-bb41-730756f1dd65",
-  "label": "Barn",
-  "language": "no",
-  "description": "Example topic description."
-}
+```sh
+curl "https://skg-if-openapi.cessda.eu/api/topics?filter=cf.search.labels:barn,cf.search.language:no"
 ```
-
----
-**Tip:** Wrap query URLs in quotes to avoid shell interpretation issues.
