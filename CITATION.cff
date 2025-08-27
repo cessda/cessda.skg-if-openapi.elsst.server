@@ -2,7 +2,7 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: "CESSDA  SKG IF OpenAPI ELSST Server"
+title: "CESSDA SKG IF OpenAPI ELSST Server"
 type: software
 message: "If you use this software, please cite it as below." 
 authors:
@@ -10,9 +10,9 @@ authors:
     family-names: "Vodopijevec"
     affiliation: "CESSDA ERIC"
     orcid: "https://orcid.org/0000-0003-1003-0281"
-identifiers:
-  - type: doi
-    value: 10.5281/zenodo.000000
-    description: Placeholder
+#identifiers:
+#  - type: doi
+#    value: 10.5281/zenodo.000000
+#    description: Placeholder
 repository-code: "https://github.com/cessda/cessda.skg-if-openapi.elsst.server"
 license: Apache-2.0
