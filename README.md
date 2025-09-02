@@ -1,5 +1,7 @@
 # CESSDA SKG IF OpenAPI ELSST Server
 
+[![SQAaaS badge shields.io](https://img.shields.io/badge/sqaaas%20software-bronze-e6ae77)](https://api.eu.badgr.io/public/assertions/AtNg-jkBTJGJk0h5qsuaEw "SQAaaS bronze badge achieved")
+
 A lightweight Python web service exposing the ELSST (European Language Social Science Thesaurus) topics via RESTful OpenAPI endpoints. This server is designed for interoperability with CESSDA SKG IF-compliant clients and services.
 
 ## Features
