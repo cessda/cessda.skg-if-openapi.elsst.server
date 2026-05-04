@@ -1,5 +1,5 @@
 > ⚠️ **This repository is no longer actively maintained.**
-> Development has moved to [https://github.com/new-org/new-repo](https://github.com/cessda/cessda.cdc.skg-if.api).
+> Development has moved to [cessda/cessda.cdc.skg-if.api](https://github.com/cessda/cessda.cdc.skg-if.api).
 > Please file issues and contribute there. This repo remains available for reference.
 
 
