@@ -1,3 +1,8 @@
+> ⚠️ **This repository is no longer actively maintained.**
+> Development has moved to [https://github.com/new-org/new-repo](https://github.com/cessda/cessda.cdc.skg-if.api).
+> Please file issues and contribute there. This repo remains available for reference.
+
+
 # CESSDA SKG IF OpenAPI ELSST Server
 
 [![SQAaaS badge shields.io](https://img.shields.io/badge/sqaaas%20software-bronze-e6ae77)](https://api.eu.badgr.io/public/assertions/AtNg-jkBTJGJk0h5qsuaEw "SQAaaS bronze badge achieved")
